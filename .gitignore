@@ -1,0 +1,80 @@
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors and IDEs
+.vscode/
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Java, Maven and Quarkus
+target/
+.quarkus/
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+hs_err_pid*
+replay_pid*
+*.class
+*.jar
+*.war
+*.nar
+*.ear
+
+# Quarkus native builds
+*-runner
+*-runner.exe
+*-runner.jar
+*.so
+
+# Logs
+logs/
+*.log
+
+# Environment and local configuration
+.env
+.env.*
+!.env.example
+application-local.yml
+application-local.yaml
+application-dev-local.yml
+application-dev-local.yaml
+
+# Secrets and certificates
+*.pem
+*.key
+*.p12
+*.jks
+*.keystore
+
+# Node and frontend tooling
+node_modules/
+dist/
+build/
+coverage/
+.nyc_output/
+.vite/
+.next/
+.nuxt/
+.svelte-kit/
+
+# Package manager caches
+.npm/
+.pnpm-store/
+.yarn/cache/
+.yarn/unplugged/
+.yarn/build-state.yml
+.yarn/install-state.gz
+
+# Test reports
+surefire-reports/
+failsafe-reports/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.swp
+*.swo

@@ -1,0 +1,39 @@
+quarkus:
+  http:
+    port: 8081
+
+  datasource:
+    db-kind: postgresql
+    username: postgres
+    password: postgres
+    jdbc:
+      url: jdbc:postgresql://localhost:5432/clustr
+
+  hibernate-orm:
+    database:
+      generation: validate
+    log:
+      sql: true
+
+  flyway:
+    migrate-at-start: true
+    locations: db/migration
+
+  smallrye-openapi:
+    path: /openapi
+    enable: true
+
+  swagger-ui:
+    always-include: true
+    path: /swagger
+
+mp:
+  jwt:
+    verify:
+      issuer: clustr
+
+smallrye:
+  jwt:
+    sign:
+      key:
+        location: privateKey.pem
