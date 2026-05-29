@@ -5,12 +5,15 @@ import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "usuarios")
@@ -28,6 +31,11 @@ public class Usuario {
 
     @Column(name = "senha_hash", nullable = false, length = 255)
     private String senhaHash;
+
+    @Enumerated(EnumType.STRING)
+    @NotNull
+    @Column(nullable = false, length = 50)
+    private Role role = Role.USUARIO;
 
     @Column(nullable = false)
     private boolean ativo = true;
@@ -52,6 +60,10 @@ public class Usuario {
     }
 
     public Usuario() {
+    }
+
+    public boolean isAdmin() {
+        return this.role.equals(Role.ADMIN);
     }
 
     public UUID getId() {
@@ -84,6 +96,14 @@ public class Usuario {
 
     public void setSenhaHash(String senhaHash) {
         this.senhaHash = senhaHash;
+    }
+
+    public Role getRole() {
+        return this.role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public boolean isAtivo() {

@@ -34,6 +34,10 @@ mp:
 
 smallrye:
   jwt:
+    new-token:
+      signature-algorithm: HS256
     sign:
-      key:
-        location: privateKey.pem
+      key: ${JWT_SECRET}
+    verify:
+      secretkey: ${JWT_SECRET}
+      algorithm: HS256
