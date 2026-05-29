@@ -1,5 +1,6 @@
 package br.dev.irontech.clustr.auth;
 
+import jakarta.annotation.security.PermitAll;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
@@ -22,12 +23,14 @@ public class AuthResource {
 
     @POST
     @Path("/login")
+    @PermitAll
     public LoginResponse login(@Valid LoginRequest loginRequest) {
         return authService.login(loginRequest);
     }
 
     @POST
     @Path("/cadastro")
+    @PermitAll
     public Response cadastro(@Valid CadastroRequest cadastroRequest) {
         CadastroResponse response = authService.cadastro(cadastroRequest);
         return Response.status(Status.CREATED).entity(response).build();

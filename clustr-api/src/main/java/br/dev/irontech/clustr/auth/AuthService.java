@@ -8,8 +8,8 @@ import io.quarkus.elytron.security.common.BcryptUtil;
 import io.smallrye.jwt.build.Jwt;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import jakarta.ws.rs.BadRequestException;
+import jakarta.ws.rs.NotAuthorizedException;
 
 @ApplicationScoped
 public class AuthService {
@@ -25,13 +25,13 @@ public class AuthService {
         Usuario usuario = usuarioRepository
                 .find("email", loginRequest.email())
                 .firstResultOptional()
-                .orElseThrow(() -> new BadRequestException("Credenciais inválidas!"));
+                .orElseThrow(() -> new NotAuthorizedException("Credenciais inválidas!"));
 
         if (Boolean.FALSE.equals(usuario.isAtivo()))
-            throw new BadRequestException("Usuário inativo no banco!");
+            throw new NotAuthorizedException("Usuário inativo no banco!");
 
         if (!BcryptUtil.matches(loginRequest.senhaPlano(), usuario.getSenhaHash()))
-            throw new BadRequestException("Credencial inválida!");
+            throw new NotAuthorizedException("Credencial inválida!");
 
         String token = Jwt
                 .issuer("clustr")
@@ -45,7 +45,7 @@ public class AuthService {
     }
 
     @Transactional
-    public CadastroResponse cadastro(@Valid CadastroRequest cadastroRequest) {
+    public CadastroResponse cadastro(CadastroRequest cadastroRequest) {
 
         boolean emailJaExiste = usuarioRepository
                 .find("email", cadastroRequest.email())
